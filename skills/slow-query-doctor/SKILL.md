@@ -1,7 +1,7 @@
 ---
 name: slow-query-doctor
 description: >
-  Diagnose why a specific OpenSearch or Elasticsearch search query is slow and
+  Diagnose why a specific OpenSearch search query is slow and
   prove a faster rewrite. Profiles the query (Profile API), localizes where the
   time goes (query vs aggregation vs fetch), scans the query for the documented
   latency traps — leading wildcards, script scoring, deep from/size pagination,
@@ -14,7 +14,7 @@ description: >
   "circuit_breaking_exception", "fielddata", "hot threads", "deep pagination",
   "from + size too large", or pastes a query DSL body and asks how to speed it
   up, without mentioning OpenSearch.
-compatibility: Works with any OpenSearch 1.x+ or Elasticsearch 7.x+ distribution — self-managed, Docker, Kubernetes, Amazon OpenSearch Service, or Serverless (query profiling works everywhere; node-level thread-pool/breaker checks need node APIs and are skipped on Serverless). Diagnosis needs cluster read + search access on the target index. Requires curl; the bundled diagnostic needs python3 (standard library only).
+compatibility: Works with any OpenSearch 1.x+ distribution — self-managed, Docker, Kubernetes, Amazon OpenSearch Service, or Serverless (query profiling works everywhere; node-level thread-pool/breaker checks need node APIs and are skipped on Serverless). Diagnosis needs cluster read + search access on the target index. Requires curl; the bundled diagnostic needs python3 (standard library only).
 metadata:
   author: goravsoni
   version: "1.1.2"
@@ -32,7 +32,7 @@ a number from the Profile API, not a guess.
 
 ## Prerequisites
 
-- A running OpenSearch (1.x+) or Elasticsearch (7.x+) cluster reachable over HTTP.
+- A running OpenSearch (1.x+) cluster reachable over HTTP.
 - `curl` — every read and every prescribed change is a `curl` call.
 - The endpoint in `$OPENSEARCH_URL` (fall back to `$ES`). This skill NEVER
   assumes `localhost`; if neither is set, ask for the endpoint in Phase 0.
@@ -111,7 +111,7 @@ The equivalent `curl` reads are in
      → index-hygiene review, not this.
    - build/design a search app, pick an embedding model, tune relevance/nDCG →
      a search-setup or relevance skill, not this.
-   - port an Elasticsearch/Solr query to OpenSearch syntax → a query-migration
+   - port a query from another engine to OpenSearch syntax → a query-migration
      skill, not this.
    For any of these you MUST decline in one sentence and stop. Do NOT run a
    hygiene audit, a config diagnostic, or any other task's script — even if such

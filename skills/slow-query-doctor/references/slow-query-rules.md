@@ -1,8 +1,8 @@
 # Slow-query rules — reads, thresholds, and the remediation runbook
 
 Loaded on demand from [SKILL.md](../SKILL.md) Phases 1–4. Every command is a
-`curl` against a generic REST path that works on any OpenSearch 1.x+ or
-Elasticsearch 7.x+ distribution. `$OPENSEARCH_URL` is the cluster endpoint
+`curl` against a generic REST path that works on any OpenSearch 1.x+
+distribution. `$OPENSEARCH_URL` is the cluster endpoint
 (fall back to `$ES`).
 
 The numeric thresholds below are **defaults that match

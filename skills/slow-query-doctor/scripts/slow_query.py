@@ -342,7 +342,7 @@ def detect_distribution(base_url):
         raise SystemExit("could not reach %s: %s" % (base_url, e))
     version = root.get("version") or {}
     node_apis = "number" in version  # Serverless exposes no node/cluster APIs
-    return version.get("distribution", "elasticsearch"), version.get("number"), node_apis
+    return version.get("distribution", "unknown"), version.get("number"), node_apis
 
 
 def _read_body(args):
