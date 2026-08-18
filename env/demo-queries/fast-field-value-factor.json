@@ -1,0 +1,2 @@
+{ "size": 10, "query": { "function_score": { "query": { "match_all": {} },
+  "field_value_factor": { "field": "popularity", "modifier": "log1p", "factor": 1.0 } } } }

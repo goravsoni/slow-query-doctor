@@ -1,0 +1,2 @@
+{ "size": 10, "query": { "function_score": { "query": { "match_all": {} },
+  "script_score": { "script": { "source": "double s = 0; for (int k = 0; k < 80; k++) { s += Math.sqrt(Math.abs(Math.sin(doc['popularity'].value + k)) + 1.0) * Math.log(2.0 + doc['price'].value) + Math.cos(doc['popularity'].value * k); } return s;" } } } } }

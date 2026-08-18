@@ -1,0 +1,12 @@
+{
+  "must_include": ["from", "search_after"],
+  "must_call": [
+    { "method": "GET", "path_regex": "_search" }
+  ],
+  "diagnostic_expect": {
+    "index": "sqd-deep",
+    "query_file": "query.json",
+    "finding_kinds": ["deep-pagination"],
+    "verdict_in": ["critical"]
+  }
+}

@@ -1,0 +1,41 @@
+# OpenSearch single-node cluster for the slow-query-doctor scenario runner.
+#
+# Up:   docker compose -f tests/docker-compose.yml up -d
+# Down: docker compose -f tests/docker-compose.yml down -v   (-v wipes data)
+#
+# Binds to 127.0.0.1 only. Security plugin disabled for local test convenience;
+# scenarios assume no auth.
+services:
+  opensearch:
+    image: opensearchproject/opensearch:3.0.0
+    container_name: slow-query-doctor-opensearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    # Host ports 9202/9602 (not 9200/9201): on this remote box the parent
+    # workspace holds 9200/9600 and index-hygiene-auditor holds 9201/9601.
+    # Point the runner at it with OPENSEARCH_URL=http://localhost:9202.
+    ports:
+      - "127.0.0.1:9202:9200"
+      - "127.0.0.1:9602:9600"
+    volumes:
+      - slow-query-doctor-data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health | grep -E 'green|yellow'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+volumes:
+  slow-query-doctor-data:

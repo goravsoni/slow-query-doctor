@@ -1,0 +1,12 @@
+{
+  "must_include": ["size", "0"],
+  "must_call": [
+    { "method": "GET", "path_regex": "_search" }
+  ],
+  "diagnostic_expect": {
+    "index": "sqd-agg",
+    "query_file": "query.json",
+    "finding_kinds": ["fetch-without-size"],
+    "verdict_in": ["warning", "critical"]
+  }
+}

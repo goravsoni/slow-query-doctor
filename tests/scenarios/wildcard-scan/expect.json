@@ -1,0 +1,13 @@
+{
+  "must_include": ["wildcard", "leading"],
+  "must_call": [
+    { "method": "GET", "path_regex": "_search" }
+  ],
+  "diagnostic_expect": {
+    "index": "sqd-wild",
+    "query_file": "query.json",
+    "finding_kinds": ["expensive-clause"],
+    "expensive_subtypes": ["wildcard-leading"],
+    "verdict_in": ["critical"]
+  }
+}

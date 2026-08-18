@@ -1,0 +1,1 @@
+{ "query": { "match_all": {} }, "aggs": { "by_category": { "terms": { "field": "category" } } } }

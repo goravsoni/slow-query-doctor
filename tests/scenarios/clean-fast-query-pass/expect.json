@@ -1,0 +1,12 @@
+{
+  "must_include": ["healthy"],
+  "must_call": [
+    { "method": "GET", "path_regex": "_search" }
+  ],
+  "diagnostic_expect": {
+    "index": "sqd-clean",
+    "query_file": "query.json",
+    "finding_kinds": [],
+    "verdict_in": ["fast"]
+  }
+}

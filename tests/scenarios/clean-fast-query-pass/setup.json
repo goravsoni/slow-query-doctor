@@ -1,0 +1,15 @@
+[
+  { "method": "DELETE", "path": "/sqd-clean" },
+  { "method": "PUT", "path": "/sqd-clean", "body": {
+    "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 } },
+    "mappings": { "properties": {
+      "title": { "type": "text" },
+      "category": { "type": "keyword" },
+      "price": { "type": "float" },
+      "popularity": { "type": "integer" },
+      "in_stock": { "type": "boolean" },
+      "@timestamp": { "type": "date" }
+    } }
+  }},
+  { "bulk": 500, "index": "sqd-clean" }
+]
